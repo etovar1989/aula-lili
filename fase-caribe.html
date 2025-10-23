@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase Caribe - Aula Lili Escolar</title>
+    <meta name="author" content="Elisxeneth Tovar Mutis" />
+    <meta name="reply-to" content="etovar@icesi.edu.co">
+    <link rel="icon" href="images/favicon.ico" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="lib/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="lib/fontawesome/css/all.css">
+    
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --ocean-blue: #1E3A8A;
+            --whale-blue: #3B82F6;
+            --caribe-orange: #F59E0B;
+            --caribe-yellow: #FCD34D;
+            --caribe-sunset: #D97706;
+            --sunny-yellow: #F59E0B;
+            --ocean-green: #10B981;
+            --coral-pink: #F472B6;
+            --light-blue: #E0F2FE;
+            --light-orange: #FEF3C7;
+            --gradient-caribe: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            --gradient-tropical: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Floating animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            33% { transform: translateX(10px) rotate(2deg); }
+            66% { transform: translateX(-10px) rotate(-2deg); }
+        }
+
+        @keyframes shine {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-blue) !important;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--caribe-orange) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--caribe-orange);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-caribe {
+            background: var(--gradient-caribe);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-caribe::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.15)"><path d="M0,30 Q250,70 500,30 T1000,30 L1000,0 L0,0 Z"/></svg>') repeat-x;
+            animation: wave 5s ease-in-out infinite;
+        }
+
+        .hero-content {
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-caribe h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-caribe p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .fase-info {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 15%; left: 8%; animation: sway 4s ease-in-out infinite; }
+        .floating-icon:nth-child(2) { top: 70%; left: 85%; animation: shine 3s ease-in-out infinite; }
+        .floating-icon:nth-child(3) { top: 35%; left: 15%; animation: float 5s ease-in-out infinite; }
+        .floating-icon:nth-child(4) { top: 80%; left: 75%; animation: bounce 2s ease-in-out infinite; }
+
+        .lilo-caribe {
+            text-align: center;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .fase-icon {
+            font-size: 8rem;
+            animation: sway 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        /* Methodology Section */
+        .methodology {
+            padding: 100px 0;
+            background: var(--light-orange);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--caribe-sunset);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .methodology-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            height: 100%;
+            margin-bottom: 30px;
+        }
+
+        .methodology-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: var(--caribe-orange);
+        }
+
+        .method-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-caribe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Guide Downloads Section */
+        .guides-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .subject-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .subject-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .subject-header h3 {
+            color: var(--caribe-sunset);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .subject-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: var(--gradient-caribe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .guide-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--caribe-orange);
+        }
+
+        .guide-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(245, 158, 11, 0.2);
+        }
+
+        .guide-info {
+            flex: 1;
+        }
+
+        .guide-number {
+            font-weight: bold;
+            color: var(--caribe-orange);
+            font-size: 0.9rem;
+        }
+
+        .guide-title {
+            font-size: 1rem;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .download-btn {
+            background: var(--caribe-orange);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .download-btn:hover {
+            background: var(--caribe-sunset);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Instructions Section */
+        .instructions {
+            padding: 100px 0;
+            background: var(--gradient-caribe);
+            color: white;
+        }
+
+        .instruction-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            min-height: 250px;
+        }
+
+        .instruction-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .instruction-number {
+            width: 40px;
+            height: 40px;
+            background: var(--caribe-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--caribe-sunset);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1F2937;
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .btn-home {
+            background: var(--sunny-yellow);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-home:hover {
+            background: #D97706;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-caribe h1 { font-size: 2.5rem; }
+            .hero-caribe p { font-size: 1.1rem; }
+            .section-title h2 { font-size: 2.2rem; }
+            .guides-grid { grid-template-columns: 1fr; }
+            .floating-icon { display: none; }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand logo-container" href="index.html">
+                <img src="images/log-eduteka-icesi.svg" class="logo-modern d-none d-lg-inline-block" alt="Logo Eduteka ICESI" title="Eduteka - Transformando la educación con tecnología" loading="eager">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">Sobre el Proyecto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#phases">Todas las Fases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#guias">Descargar Guías</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-caribe">
+        <div class="floating-elements">
+            <div class="floating-icon"><i class="fas fa-palm-tree"></i></div>
+            <div class="floating-icon"><i class="fas fa-sun"></i></div>
+            <div class="floating-icon"><i class="fas fa-cocktail"></i></div>
+            <div class="floating-icon"><i class="fas fa-shell"></i></div>
+        </div>
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1>Fase Caribe</h1>
+                    <p>Disfrutando la brisa tropical del conocimiento con Lilo. Un paraíso educativo donde los estudiantes consolidan competencias a través de proyectos creativos y complejos.</p>
+                    
+                    <div class="fase-info">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <h4>🌴 Edades</h4>
+                                <p>9 - 11 años</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>📚 Grados</h4>
+                                <p>4° y 5°</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>📝 Guías</h4>
+                                <p>30 actividades</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="#guias" class="btn-home">
+                            <i class="fas fa-download"></i>
+                            Descargar Guías
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 lilo-caribe">
+                    <div class="fase-icon">🏝️</div>
+                    <div style="font-size: 120px; color: rgba(255,255,255,0.9);">🐵</div>
+                    <h3 style="color: var(--caribe-yellow); margin-top: 20px;">¡Hola exploradores tropicales!</h3>
+                    <p style="color: #fff;">Lilo está aquí para disfrutar juntos la aventura del aprendizaje bajo el sol caribeño</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Methodology Section -->
+    <section class="methodology">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Cómo Aprendemos en la Fase Caribe?</h2>
+                <p>En la Fase Caribe, los estudiantes de 9 a 11 años consolidan competencias clave en <strong>Matemáticas</strong> y <strong>Español</strong>, con un enfoque que integra el razonamiento lógico, la producción textual creativa y los valores transversales del proyecto.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h4>Matemáticas: CPA y Pensamiento Lógico</h4>
+                        <p>El enfoque CPA del Método Singapur se aplica a problemas más complejos: operaciones combinadas, fracciones, ángulos, mapas con escala y formas de pago. Los estudiantes aprenden a resolver situaciones cotidianas con autonomía y precisión.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Crear un presupuesto para un viaje usando suma, resta y multiplicación → representar los gastos en gráficos → calcular el ahorro final</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4>Español: Argumentación y Producción Textual</h4>
+                        <p>Se fortalecen las habilidades de <strong>argumentación</strong>, <strong>comprensión lectora crítica</strong> y <strong>producción de diversos textos</strong> (narrativos, informativos, líricos, dramatúrgicos). Los estudiantes exploran la tradición oral, escriben cartas, noticias y poemas, siempre con una mirada ética y reflexiva.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Leer una leyenda caribeña → identificar su mensaje cultural → escribir su propia versión con un enfoque argumentativo</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Valores Transversales</h4>
+                        <p>Las actividades integran los cinco valores del proyecto: <strong>Esperanza, Vida, Fraternidad, Cooperación y Alegría</strong>. El aprendizaje se convierte en un acto colectivo donde el trabajo en equipo, el respeto por las ideas ajenas y la celebración de logros son fundamentales.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Crear un periódico escolar en grupo → investigar, escribir y editar → presentar los resultados con orgullo colectivo</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Downloads Section -->
+    <section id="guias" class="guides-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Guías de Aprendizaje - Fase Caribe</h2>
+                <p>30 guías diseñadas para niños de 9 a 11 años. Cada aventura tropical consolida competencias con proyectos creativos y nuestro capitán Lilo.</p>
+            </div>
+            
+            <div class="guides-grid">
+                <!-- Matemáticas Section -->
+                <div class="subject-section">
+                    <div class="subject-header">
+                        <div class="subject-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Matemáticas</h3>
+                        <!-- <p>15 guías para conquistar el tesoro numérico</p> -->
+                    </div>
+                    
+                    <div class="guides-list">
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.1</div>
+                                <div class="guide-title">Operaciones con suma y resta</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/1. M - Caribe- Operaciones con suma y resta.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.2</div>
+                                <div class="guide-title">La suma y la multiplicación</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/2. M - Caribe-La suma y la multiplicación.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.3</div>
+                                <div class="guide-title">Unidades de medida longitud</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/3. M - Caribe-Unidades de medida longitud.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.4</div>
+                                <div class="guide-title" style="color: #D97706;">Figuras geométricas bi y tridimensionales</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/4. M - Caribe- Figuras geometricas bi y tridimensionales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.5</div>
+                                <div class="guide-title">Organización y representación de datos</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/5. M - Caribe- Organización y representación de datos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.6</div>
+                                <div class="guide-title">Valor posicional unidades, decenas y centenas</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/6. M - Caribe-Valor posicional unidades, decenas y centenas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.7</div>
+                                <div class="guide-title">Unidades de medida peso</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/7. M - Caribe-Unidades de medida peso.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.8</div>
+                                <div class="guide-title">Comparación de fracciones con igual denominador</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/8. M - Caribe-Comparación de fracciones con igual denominador.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.9</div>
+                                <div class="guide-title">Ubicación espacial los mapas, puntos cardinales y la escala</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/9. M - Caribe-Ubicación espacial los mapas, puntos cardinales y la escala.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.10</div>
+                                <div class="guide-title">Unidades de medida tiempo</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/10. M - Caribe-Unidades de medida tiempo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.11</div>
+                                <div class="guide-title">Ángulos</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/11. M - Caribe-Ángulos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.12</div>
+                                <div class="guide-title">Probabilidades</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/12. M - Caribe-Probabilidades.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.13</div>
+                                <div class="guide-title">Unidades de medida capacidad</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/13. M - Caribe- Unidades de medida capacidad.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.14</div>
+                                <div class="guide-title">Unidades de medida área</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/14. M - Caribe- Unidades de medida área.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.15</div>
+                                <div class="guide-title">Manejo del dinero formas de pago</div>
+                            </div>
+                            <a href="pdf/caribe/matematicas/15. M - Caribe-Manejo del dinero formas de pago.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Español Section -->
+                <div class="subject-section">
+                    <div class="subject-header">
+                        <div class="subject-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Español</h3>
+                        <!-- <p>15 guías para navegar las corrientes literarias</p> -->
+                    </div>
+                    
+                    <div class="guides-list">
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.1</div>
+                                <div class="guide-title">Estrategias argumentativas</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/1. E - Caribe - Estrategias argumentativas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.2</div>
+                                <div class="guide-title">Estrategias argumentativas 2</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/2. E - Caribe - Estrategias argumentativas 2.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.3</div>
+                                <div class="guide-title">Búsqueda, selección y almacenamiento de información</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/3. E - Caribe -Búsqueda, selección y almacenamiento de información.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.4</div>
+                                <div class="guide-title">Escritura epistolar</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/4. E - Caribe - Escritura epistolar.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.5</div>
+                                <div class="guide-title">Texto narrativo</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/5. E - Caribe -Texto narrativo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.6</div>
+                                <div class="guide-title">La noticia</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/6. E - Caribe -La noticia.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.7</div>
+                                <div class="guide-title">Comprensión lectora</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/7. E - Caribe - Comprensión lectora.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.8</div>
+                                <div class="guide-title">Comprensión lectora 2</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/8. E - Caribe - Comprensión lectora 2.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.9</div>
+                                <div class="guide-title">Comprensión lectora 3</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/9. E - Caribe - Comprensión lectora 3.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.10</div>
+                                <div class="guide-title">Tradición oral</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/10. E - Caribe - Tradición oral.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.11</div>
+                                <div class="guide-title">Tradición oral 2</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/11. E - Caribe - Tradición oral 2.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.12</div>
+                                <div class="guide-title">Tradición oral 3</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/12. E - Caribe - Tradición oral 3.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.13</div>
+                                <div class="guide-title">Producción del texto lírico</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/13. E - Caribe - Producción del texto lírico.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.14</div>
+                                <div class="guide-title">Producción del texto dramatúrgico</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/14. E - Caribe - Producción del texto dramatúrgico.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">3.15</div>
+                                <div class="guide-title">Producción de texto informativo</div>
+                            </div>
+                            <a href="pdf/caribe/lenguaje/15. E - Caribe - Producción de texto informativo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Instructions Section -->
+    <section class="instructions">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">Recomendaciones para la Fase Caribe</h2>
+                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para preadolescentes de 9 a 11 años en contexto hospitalario o de desescolarización.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">1</div>
+                        <h4>Saludo con Lilo</h4>
+                        <p>Invita al estudiante a compartir sus opiniones y experiencias. En esta etapa, valoran ser escuchados como pensadores críticos y creativos.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">2</div>
+                        <h4>Lee la Historia Pretexto</h4>
+                        <p>Lee con entusiasmo y plantea preguntas que inviten a la reflexión crítica: “¿Estás de acuerdo con la decisión del personaje?”, “¿Qué harías tú?”. Esto activa la empatía y el pensamiento argumentativo.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">3</div>
+                        <h4>Matemáticas: CPA con Autonomía</h4>
+                        <p>Permite que el estudiante elija materiales concretos (fracciones, geoplanos) y estrategias pictóricas (gráficos, tablas). Guíalo para que conecte estas representaciones con procedimientos abstractos (fórmulas, algoritmos).</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">4</div>
+                        <h4>Español: Producción con Propósito</h4>
+                        <p>Fomenta la creación de textos con intención clara: argumentar, informar, narrar o expresar emociones. Anima a usar recursos literarios y a reflexionar sobre el impacto ético y social de sus palabras.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">5</div>
+                        <h4>Flexibilidad y Profundidad</h4>
+                        <p>No hay prisa, pero sí profundidad. Si el estudiante está listo para explorar conceptos más complejos, acompáñalo. Si necesita más tiempo en lo concreto, respétalo. El objetivo es la comprensión significativa.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">6</div>
+                        <h4>Conexión con lo Real</h4>
+                        <p>Relaciona los aprendizajes con su entorno: “¿Cómo usarías las fracciones en la cocina?”, “¿Qué noticia escribirías sobre tu hospital?”. Esto hace el conocimiento relevante y duradero.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">7</div>
+                        <h4>Involucra a la Familia</h4>
+                        <p>Invita al acompañante a participar como oyente crítico, coautor o entrevistado. La <strong>fraternidad</strong> y la <strong>cooperación</strong> enriquecen el proceso y fortalecen los lazos afectivos.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">8</div>
+                        <h4>Cierre con Proyecto</h4>
+                        <p>Termina con el “Momento de Concursar” (matemáticas) o con una actividad integradora (español: montar una obra de teatro, publicar un periódico). Celebra el esfuerzo, la creatividad y el trabajo en equipo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <div class="alert alert-info d-inline-block" style="background: rgba(255,255,255,0.1); border: none; color: white;">
+                    <i class="fas fa-sun text-warning me-2"></i>
+                    <strong>Recuerda:</strong> Las guías de la Fase Caribe están diseñadas para preadolescentes que pueden estar en contextos de vulnerabilidad. El respeto por su voz, la confianza en sus capacidades y la celebración de su creatividad son tus mejores herramientas pedagógicas.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="pb-3">
+                <img src="images/logo-eduteka-blanco.svg" class="logo-modern d-none d-lg-inline-block" alt="Logo Eduteka ICESI" title="Eduteka - Transformando la educación con tecnología" loading="eager">
+            </div>
+            <div class="footer-logo">
+                🐋 Lili Colección - Fase Caribe
+            </div>
+            <p>Educación inclusiva y flexible para niños de 9 a 11 años.<br>
+            Consolidando competencias bajo la brisa tropical del conocimiento y la creatividad.</p>
+            
+            <div class="mt-4">
+                <a href="index.html" class="btn-home">
+                    <i class="fas fa-home"></i>
+                    Volver al Inicio
+                </a>
+            </div>
+            
+            <hr style="margin: 40px 0 20px; opacity: 0.3;">
+            <p style="margin: 0; opacity: 0.7;">&copy; 2025 Aula Lili - Proyecto Educativo Inclusivo. Basado en el trabajo de la Fundación Valle del Lili.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.methodology-card, .guide-item, .instruction-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Download tracking
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const guideTitle = this.closest('.guide-item').querySelector('.guide-title').textContent;
+                console.log(`Descargando: ${guideTitle}`);
+            });
+        });
+
+        // Tropical animations for floating icons
+        document.querySelectorAll('.floating-icon').forEach((icon, index) => {
+            // Different animation styles for tropical elements
+            if (index === 0) { // Palm tree sways
+                setInterval(() => {
+                    const sway = Math.sin(Date.now() * 0.002) * 15;
+                    icon.style.transform = `translateX(${sway}px) rotate(${sway * 0.3}deg)`;
+                }, 16);
+            } else if (index === 1) { // Sun shines
+                setInterval(() => {
+                    const shine = Math.sin(Date.now() * 0.004) * 0.2 + 1;
+                    icon.style.transform = `scale(${shine}) rotate(${Date.now() * 0.01}deg)`;
+                }, 16);
+            } else { // Others float
+                setInterval(() => {
+                    const float = Math.sin(Date.now() * 0.003 + index) * 12;
+                    icon.style.transform = `translateY(${float}px) rotate(${float * 0.2}deg)`;
+                }, 16);
+            }
+        });
+
+        // Add hover effect to guide items
+        document.querySelectorAll('.guide-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderLeftColor = '#FCD34D';
+                this.style.backgroundColor = '#FEF3C7';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.borderLeftColor = '#F59E0B';
+                this.style.backgroundColor = 'white';
+            });
+        });
+
+        // Tropical background effect
+        setInterval(() => {
+            const heroSection = document.querySelector('.hero-caribe');
+            if (heroSection) {
+                const opacity = 0.1 + Math.sin(Date.now() * 0.001) * 0.05;
+                heroSection.style.setProperty('--wave-opacity', opacity);
+            }
+        }, 16);
+    </script>
+</body>
+</html>

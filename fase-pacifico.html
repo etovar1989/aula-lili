@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase Pacífico - Aula Lili Escolar</title>
+    <meta name="author" content="Elisxeneth Tovar Mutis" />
+    <meta name="reply-to" content="etovar@icesi.edu.co">
+    <link rel="icon" href="images/favicon.ico" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="lib/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="lib/fontawesome/css/all.css">
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --ocean-blue: #1E3A8A;
+            --whale-blue: #3B82F6;
+            --pacifico-blue: #1D4ED8;
+            --light-pacifico: #3B82F6;
+            --sunny-yellow: #F59E0B;
+            --ocean-green: #10B981;
+            --coral-pink: #F472B6;
+            --light-blue: #E0F2FE;
+            --gradient-pacifico: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        /* Floating animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        @keyframes flow {
+            0%, 100% { transform: translateX(0) scale(1); }
+            50% { transform: translateX(10px) scale(1.1); }
+        }
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-blue) !important;
+            font-size: 1.8rem;
+        }
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: var(--pacifico-blue) !important;
+            transform: translateY(-2px);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--pacifico-blue);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        /* Hero Section */
+        .hero-pacifico {
+            background: var(--gradient-pacifico);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-pacifico::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><path d="M0,20 Q250,80 500,20 T1000,20 L1000,0 L0,0 Z"/></svg>') repeat-x;
+            animation: wave 6s ease-in-out infinite;
+        }
+        .hero-content {
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+        .hero-pacifico h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-pacifico p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .fase-info {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(5px);
+        }
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 4s ease-in-out infinite;
+        }
+        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: -0.5s; }
+        .floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -1s; }
+        .floating-icon:nth-child(3) { top: 40%; left: 20%; animation-delay: -1.5s; }
+        .floating-icon:nth-child(4) { top: 80%; left: 70%; animation-delay: -2s; }
+        .lilo-pacifico {
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+        .fase-icon {
+            font-size: 8rem;
+            animation: flow 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        /* Methodology Section */
+        .methodology {
+            padding: 100px 0;
+            background: #EBF8FF;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--pacifico-blue);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .methodology-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            height: 100%;
+            margin-bottom: 30px;
+        }
+        .methodology-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: var(--pacifico-blue);
+        }
+        .method-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-pacifico);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+        /* Guide Downloads Section */
+        .guides-section {
+            padding: 100px 0;
+            background: white;
+        }
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .subject-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .subject-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .subject-header h3 {
+            color: var(--pacifico-blue);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .subject-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: var(--gradient-pacifico);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        .guide-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--pacifico-blue);
+        }
+        .guide-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.2);
+        }
+        .guide-info {
+            flex: 1;
+        }
+        .guide-number {
+            font-weight: bold;
+            color: var(--pacifico-blue);
+            font-size: 0.9rem;
+        }
+        .guide-title {
+            font-size: 1rem;
+            color: #333;
+            margin: 5px 0;
+        }
+        .download-btn {
+            background: var(--pacifico-blue);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .download-btn:hover {
+            background: #1E40AF;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+        /* Instructions Section */
+        .instructions {
+            padding: 100px 0;
+            background: var(--gradient-pacifico);
+            color: white;
+        }
+        .instruction-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            min-height: 250px;
+        }
+        .instruction-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+        .instruction-number {
+            width: 40px;
+            height: 40px;
+            background: var(--sunny-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        /* Footer */
+        .footer {
+            background: #1F2937;
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+        .btn-home {
+            background: var(--sunny-yellow);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-home:hover {
+            background: #D97706;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+            color: white;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-pacifico h1 { font-size: 2.5rem; }
+            .hero-pacifico p { font-size: 1.1rem; }
+            .section-title h2 { font-size: 2.2rem; }
+            .guides-grid { grid-template-columns: 1fr; }
+            .floating-icon { display: none; }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo-container img {
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand logo-container" href="index.html">
+                <img src="images/log-eduteka-icesi.svg" class="logo-modern d-none d-lg-inline-block" alt="Logo Eduteka ICESI" title="Eduteka - Transformando la educación con tecnología" loading="eager">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">Sobre el Proyecto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#phases">Todas las Fases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#guias">Descargar Guías</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-pacifico">
+        <div class="floating-elements">
+            <div class="floating-icon"><i class="fas fa-fish"></i></div>
+            <div class="floating-icon"><i class="fas fa-anchor"></i></div>
+            <div class="floating-icon"><i class="fas fa-ship"></i></div>
+            <div class="floating-icon"><i class="fas fa-compass"></i></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1>Fase Pacífico</h1>
+                    <p>Navegando hacia nuevos horizontes de conocimiento con Lilo. Un espacio donde los jóvenes exploradores desarrollan habilidades básicas sólidas para su viaje educativo.</p>
+                    <div class="fase-info">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <h4>👧👦 Edades</h4>
+                                <p>7 - 9 años</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>📚 Grados</h4>
+                                <p>3° y 4°</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>📝 Guías</h4>
+                                <p>30 actividades</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <a href="#guias" class="btn-home">
+                            <i class="fas fa-download"></i>
+                            Descargar Guías
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 lilo-pacifico">
+                    <div class="fase-icon">🌊</div>
+                    <div style="font-size: 120px; color: rgba(255,255,255,0.9);">🐵</div>
+                    <h3 style="color: var(--sunny-yellow); margin-top: 20px;">¡Hola navegantes del saber!</h3>
+                    <p style="color: #fff;">Lilo está listo para surcar los océanos del conocimiento junto a ustedes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Methodology Section -->
+    <section class="methodology">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Cómo Aprendemos en la Fase Pacífico?</h2>
+                <p>En la Fase Pacífico, los niños y niñas de 7 a 9 años consolidan habilidades fundamentales en <strong>Matemáticas</strong> y <strong>Español</strong>, con un enfoque que equilibra el razonamiento lógico, la expresión comunicativa y los valores transversales del proyecto.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h4>Matemáticas: CPA y Resolución de Problemas</h4>
+                        <p>Seguimos el enfoque CPA del Método Singapur, pero ahora con mayor énfasis en la <strong>resolución de problemas cotidianos</strong>. Los estudiantes aprenden a sumar, restar, medir, organizar datos y comprender el valor del dinero, siempre partiendo de lo concreto hacia lo abstracto.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Resolver problemas de suma usando monedas reales → dibujar barras de conteo → escribir la operación simbólica</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4>Español: Comunicación y Literatura</h4>
+                        <p>Se fortalece la <strong>comprensión lectora</strong>, la <strong>producción textual</strong> y la <strong>expresión oral</strong>. Los estudiantes preparan exposiciones, leen fábulas, describen a su familia, exploran tradiciones orales y aprenden a incluir elementos no verbales en sus textos, siempre con un enfoque ético y emocional.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Leer una fábula → identificar su moraleja → escribir su propia versión con un mensaje ético</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Valores Transversales</h4>
+                        <p>Las actividades integran los cinco valores del proyecto: <strong>Esperanza, Vida, Fraternidad, Cooperación y Alegría</strong>. El aprendizaje se convierte en un acto colectivo donde la familia y el acompañante son aliados fundamentales.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Trabajar en equipo para crear un periódico escolar → compartir ideas → celebrar los logros colectivos</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Guide Downloads Section -->
+    <section id="guias" class="guides-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Guías de Aprendizaje - Fase Pacífico</h2>
+                <p>30 guías diseñadas para niños de 7 a 9 años. Cada aventura de aprendizaje desarrolla habilidades básicas sólidas con nuestro capitán Lilo.</p>
+            </div>
+            <div class="guides-grid">
+                <!-- Matemáticas Section -->
+                <div class="subject-section">
+                    <div class="subject-header">
+                        <div class="subject-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Matemáticas</h3>
+                    </div>
+                    <div class="guides-list">
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.1</div>
+                                <div class="guide-title">La suma</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/1. M - Pacífico- La suma.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.2.1</div>
+                                <div class="guide-title">Pacífico- La suma (variación)</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/1.1 M - Pacífico- La suma (variación).pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.2</div>
+                                <div class="guide-title">Pacífico- La suma 2</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/2. M - Pacífico- La suma 2.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.3</div>
+                                <div class="guide-title">Unidades de medida longitud</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/3. M - Pacífico- Unidades de medida longitud.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.4</div>
+                                <div class="guide-title">Figuras geométricas bi y tridimensionales</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/4. M - Pacifico- Figuras geometricas bi y tridimensionales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.5</div>
+                                <div class="guide-title">Organización y representación de datos</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/5. M - Pacífico- Organización y representación de datos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.6</div>
+                                <div class="guide-title">Valor posicional unidades y decenas</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/6. M - Pacífico- Valor posicional unidades y decenas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.7</div>
+                                <div class="guide-title">Unidades de medida peso</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/7. M - Pacífico- Unidades de medida peso.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.8</div>
+                                <div class="guide-title">Reconocimiento de la fracción</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/8. M - Pacífico- Reconocimiento de la tracción.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.9</div>
+                                <div class="guide-title">Puntos cardinales</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/9. M - Pacífico- Puntos cardinales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.10</div>
+                                <div class="guide-title">Unidades de medida tiempo</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/10. M - Pacífico-Unidades de medida tiempo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.11</div>
+                                <div class="guide-title">Líneas paralelas y perpendiculares</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/11. M - Pacífico- Lineas paralelas y perpendiculares.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.12</div>
+                                <div class="guide-title">Probabilidades</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/12. M - Pacífico- Probabilidades.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.13</div>
+                                <div class="guide-title">Unidades de medida capacidad</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/13. M - Pacífico- Unidades de medida capacidad.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.14</div>
+                                <div class="guide-title">Perímetro de polígonos</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/14. M - Pacífico- Perímetro de polígonos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.15</div>
+                                <div class="guide-title">Manejo del dinero: gasto y ahorro</div>
+                            </div>
+                            <a href="pdf/pacifico/matematicas/15. M - Pacífico-Manejo del dinero el gasto y el ahorro.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Español Section -->
+                <div class="subject-section">
+                    <div class="subject-header">
+                        <div class="subject-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Español</h3>
+                    </div>
+                    <div class="guides-list">
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.1</div>
+                                <div class="guide-title">Prepara una exposición oral</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/1. E - Pacífico - Prepara una exposición oral.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.2</div>
+                                <div class="guide-title">Identifica diferencias entre tipos de textos</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/2. E - Pacífico - Identifica diferencias entre tipos de textos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.3</div>
+                                <div class="guide-title">Entiendo y creo cuentos</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/3. E - Pacífico - Entiendo y creo cuentos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.4</div>
+                                <div class="guide-title">Lectura de fábulas</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/4. E - Pacífico - Lectura de fábulas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.5</div>
+                                <div class="guide-title">Mensajes orales</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/5. E - Pacífico - Mensajes Orales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.6</div>
+                                <div class="guide-title">Me conozco e identifico mis emociones</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/6. E- Pacífico -  Me conozco e identifico mis emociones.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.7</div>
+                                <div class="guide-title">Describe a tu familia</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/7. E - Pacífico - Describe a tu familia.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.8</div>
+                                <div class="guide-title">Retahílas y juegos de palabras</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/8. E - Pacífico - Retahilas y juegos de palabras.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.9</div>
+                                <div class="guide-title">Realiza experimentos científicos</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/9. E - Pacífico - Realiza experimentos científicos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.10</div>
+                                <div class="guide-title">Tradiciones orales</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/10. E - Pacífico - Tradiciones orales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.11</div>
+                                <div class="guide-title">Lee y comprende textos de tu interés</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/11. E - Pacífico - Lee y comprende textos de tu interés.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.12</div>
+                                <div class="guide-title">Incluyo elementos no verbales en los textos que escribo</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/12. E - Pacífico - Incluyo elementos no verbales en los textos que escribo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.13</div>
+                                <div class="guide-title">Escritura compartida</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/13. E - Pacífico - Escritura compartida.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.14</div>
+                                <div class="guide-title">Escritor de noticias</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/14. E - Pacífico - Escritor de noticias.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">2.15</div>
+                                <div class="guide-title">Vamos a identificar historias</div>
+                            </div>
+                            <a href="pdf/pacifico/lenguaje/15. E - Pacífico - Vamos a identificar historias.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Instructions Section -->
+    <section class="instructions">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">Recomendaciones para la Fase Pacífico</h2>
+                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para niños de 7 a 9 años en contexto hospitalario o de desescolarización.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">1</div>
+                        <h4>Saludo con Lilo</h4>
+                        <p>Invita al niño a compartir cómo se siente y qué sabe del tema. En esta fase, los estudiantes valoran ser escuchados y reconocidos como pensadores activos.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">2</div>
+                        <h4>Lee la Historia Pretexto</h4>
+                        <p>Lee con entusiasmo y haz preguntas abiertas: “¿Qué harías tú en esta situación?”, “¿Por qué crees que el personaje actuó así?”. Esto activa la empatía y la comprensión crítica.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">3</div>
+                        <h4>Matemáticas: CPA con Profundidad</h4>
+                        <p>Usa materiales concretos (monedas, regletas, ábacos), luego introduce representaciones pictóricas (barras de conteo) y finalmente el lenguaje simbólico. Adapta la complejidad según el ritmo del estudiante.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">4</div>
+                        <h4>Español: Expresión con Propósito</h4>
+                        <p>Fomenta la producción de textos con intención comunicativa: describir, narrar, argumentar. Anima a usar recursos no verbales (dibujos, gestos) y a reflexionar sobre el mensaje ético de las historias.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">5</div>
+                        <h4>Flexibilidad y Ajustes</h4>
+                        <p>No hay prisa. Si el estudiante necesita más tiempo en lo concreto o en la oralidad, respétalo. El objetivo es que cada sesión sea un espacio de <strong>seguridad, confianza y descubrimiento</strong>.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">6</div>
+                        <h4>Conexión con la Vida Real</h4>
+                        <p>Relaciona los aprendizajes con la experiencia del niño: “¿Tú has ahorrado dinero?”, “¿Has contado una historia a tu familia?”. Esto hace el conocimiento significativo y duradero.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">7</div>
+                        <h4>Involucra a la Familia</h4>
+                        <p>Invita al acompañante a participar: que escuche la exposición oral, que lea la fábula, que juegue con el dinero. La <strong>fraternidad</strong> y la <strong>cooperación</strong> son pilares del proceso.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">8</div>
+                        <h4>Cierre con Juego y Reflexión</h4>
+                        <p>Termina con el “Momento de Concursar” (matemáticas) o con una actividad lúdica (español: dramatización, creación de noticias). Celebra el esfuerzo, no solo el resultado.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <div class="alert alert-info d-inline-block" style="background: rgba(255,255,255,0.1); border: none; color: white;">
+                    <i class="fas fa-compass text-warning me-2"></i>
+                    <strong>Recuerda:</strong> Las guías de la Fase Pacífico están diseñadas para niños que pueden estar en contextos de vulnerabilidad. La paciencia, el respeto por su ritmo y la celebración de sus logros son tus mejores herramientas pedagógicas.
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="pb-3">
+                <img src="images/logo-eduteka-blanco.svg" class="logo-modern d-none d-lg-inline-block" alt="Logo Eduteka ICESI" title="Eduteka - Transformando la educación con tecnología" loading="eager">
+            </div>
+            <div class="footer-logo">
+                🐋 Lili Colección - Fase Pacífico
+            </div>
+            <p>Educación inclusiva y flexible para niños de 7 a 9 años.<br>
+            Navegando hacia nuevos horizontes de conocimiento con determinación y alegría.</p>
+            <div class="mt-4">
+                <a href="index.html" class="btn-home">
+                    <i class="fas fa-home"></i>
+                    Volver al Inicio
+                </a>
+            </div>
+            <hr style="margin: 40px 0 20px; opacity: 0.3;">
+            <p style="margin: 0; opacity: 0.7;">&copy; 2025 Aula Lili - Proyecto Educativo Inclusivo. Basado en el trabajo de la Fundación Valle del Lili.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        // Observe all cards and sections
+        document.querySelectorAll('.methodology-card, .guide-item, .instruction-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+        // Download tracking (opcional)
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const guideTitle = this.closest('.guide-item').querySelector('.guide-title').textContent;
+                console.log(`Descargando: ${guideTitle}`);
+            });
+        });
+        // Ocean wave effect for floating icons
+        document.querySelectorAll('.floating-icon').forEach((icon, index) => {
+            setInterval(() => {
+                const wave = Math.sin(Date.now() * 0.003 + index) * 15;
+                icon.style.transform = `translateY(${wave}px) rotate(${wave * 0.2}deg)`;
+            }, 16);
+        });
+        // Add hover effect to guide items
+        document.querySelectorAll('.guide-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderLeftColor = '#F59E0B';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.borderLeftColor = '#3B82F6';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase Amazonas - Aula Lili Escolar</title>
+    <meta name="author" content="Elisxeneth Tovar Mutis" />
+    <meta name="reply-to" content="etovar@icesi.edu.co">
+    <link rel="icon" href="images/favicon.ico" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="lib/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="lib/fontawesome/css/all.css">
+    
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --ocean-blue: #1E3A8A;
+            --whale-blue: #3B82F6;
+            --amazonas-purple: #8B5CF6;
+            --amazonas-deep: #7C3AED;
+            --amazonas-green: #10B981;
+            --jungle-green: #059669;
+            --sunny-yellow: #F59E0B;
+            --ocean-green: #10B981;
+            --coral-pink: #F472B6;
+            --light-blue: #E0F2FE;
+            --light-purple: #F3E8FF;
+            --gradient-amazonas: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            --gradient-jungle: linear-gradient(135deg, #10B981 0%, #8B5CF6 100%);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Floating animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        @keyframes grow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.15) rotate(2deg); }
+        }
+
+        @keyframes flutter {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(-3deg); }
+            50% { transform: translateY(-15px) rotate(0deg); }
+            75% { transform: translateY(-8px) rotate(3deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-blue) !important;
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--amazonas-purple) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--amazonas-purple);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-amazonas {
+            background: var(--gradient-amazonas);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-amazonas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><path d="M0,40 Q250,90 500,40 T1000,40 L1000,0 L0,0 Z"/></svg>') repeat-x;
+            animation: wave 7s ease-in-out infinite;
+        }
+
+        .hero-content {
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-amazonas h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-amazonas p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .fase-info {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .floating-icon:nth-child(1) { top: 15%; left: 8%; animation: grow 4s ease-in-out infinite; }
+        .floating-icon:nth-child(2) { top: 70%; left: 85%; animation: flutter 3s ease-in-out infinite; }
+        .floating-icon:nth-child(3) { top: 35%; left: 15%; animation: pulse 2s ease-in-out infinite; }
+        .floating-icon:nth-child(4) { top: 80%; left: 75%; animation: bounce 3s ease-in-out infinite; }
+
+        .lilo-amazonas {
+            text-align: center;
+            animation: grow 4s ease-in-out infinite;
+        }
+
+        .fase-icon {
+            font-size: 8rem;
+            animation: grow 3s ease-in-out infinite;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        /* Methodology Section */
+        .methodology {
+            padding: 100px 0;
+            background: var(--light-purple);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--amazonas-deep);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .methodology-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            height: 100%;
+            margin-bottom: 30px;
+        }
+
+        .methodology-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: var(--amazonas-purple);
+        }
+
+        .method-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-amazonas);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        /* Guide Downloads Section */
+        .guides-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .subject-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .subject-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .subject-header h3 {
+            color: var(--amazonas-deep);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .subject-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: var(--gradient-amazonas);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .guide-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--amazonas-purple);
+        }
+
+        .guide-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .guide-info {
+            flex: 1;
+        }
+
+        .guide-number {
+            font-weight: bold;
+            color: var(--amazonas-purple);
+            font-size: 0.9rem;
+        }
+
+        .guide-title {
+            font-size: 1rem;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .download-btn {
+            background: var(--amazonas-purple);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .download-btn:hover {
+            background: var(--amazonas-deep);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Instructions Section */
+        .instructions {
+            padding: 100px 0;
+            background: var(--gradient-amazonas);
+            color: white;
+        }
+
+        .instruction-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            min-height: 250px;
+        }
+
+        .instruction-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+
+        .instruction-number {
+            width: 40px;
+            height: 40px;
+            background: var(--jungle-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1F2937;
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .btn-home {
+            background: var(--sunny-yellow);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-home:hover {
+            background: #D97706;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-amazonas h1 { font-size: 2.5rem; }
+            .hero-amazonas p { font-size: 1.1rem; }
+            .section-title h2 { font-size: 2.2rem; }
+            .guides-grid { grid-template-columns: 1fr; }
+            .floating-icon { display: none; }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand logo-container" href="index.html">
+                <img src="images/log-eduteka-icesi.svg" class="logo-modern d-none d-lg-inline-block" alt="Logo Eduteka ICESI" title="Eduteka - Transformando la educación con tecnología" loading="eager">
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">Sobre el Proyecto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#phases">Todas las Fases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#guias">Descargar Guías</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-amazonas">
+        <div class="floating-elements">
+            <div class="floating-icon"><i class="fas fa-leaf"></i></div>
+            <div class="floating-icon"><i class="fas fa-feather-alt"></i></div>
+            <div class="floating-icon"><i class="fas fa-spider"></i></div>
+            <div class="floating-icon"><i class="fas fa-frog"></i></div>
+        </div>
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1>Fase Amazonas</h1>
+                    <p>Explorando la biodiversidad del conocimiento con Lilo. Un ecosistema educativo donde los estudiantes desarrollan pensamiento abstracto y se preparan para nuevos horizontes académicos.</p>
+                    
+                    <div class="fase-info">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <h4>🧑‍🎓 Edades</h4>
+                                <p>11 - 14 años</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>📚 Grados</h4>
+                                <p>6°, 7° y 8°</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>📝 Guías</h4>
+                                <p>30 actividades</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="#guias" class="btn-home">
+                            <i class="fas fa-download"></i>
+                            Descargar Guías
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 lilo-amazonas">
+                    <div class="fase-icon">🌳</div>
+                    <div style="font-size: 120px; color: rgba(255,255,255,0.9);">🐵</div>
+                    <h3 style="color: #10B981; margin-top: 20px;">¡Hola científicos de la selva!</h3>
+                    <p style="color: #fff;">Lilo está preparado para explorar junto a ustedes los misterios más profundos del aprendizaje</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section class="methodology">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Cómo Aprendemos en la Fase Amazonas?</h2>
+                <p>En la Fase Amazonas, los adolescentes de 11 a 14 años desarrollan pensamiento abstracto y preparan su transición a la educación media, con un enfoque equilibrado entre <strong>Matemáticas</strong>, <strong>Español</strong> y los <strong>valores transversales</strong> del proyecto.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h4>Matemáticas: Pensamiento Abstracto y Modelización</h4>
+                        <p>El enfoque CPA del Método Singapur evoluciona hacia la resolución de problemas complejos: operaciones combinadas, porcentajes, expresiones algebraicas, plano cartesiano y análisis de datos. Los estudiantes aprenden a modelar situaciones reales con herramientas matemáticas avanzadas.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Analizar el crecimiento poblacional usando gráficos y ecuaciones → interpretar resultados → proponer soluciones sostenibles</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4>Español: Análisis Crítico y Producción Literaria</h4>
+                        <p>Se fortalece la <strong>comprensión crítica de medios</strong>, la <strong>producción de ensayos argumentativos</strong> y el <strong>estudio de la literatura latinoamericana</strong>. Los estudiantes analizan información, evalúan fuentes, escriben textos con rigor y exploran la relación entre lenguaje, arte y sociedad.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Analizar una noticia sobre el medio ambiente → contrastar con otras fuentes → escribir un ensayo con postura ética y argumentos sólidos</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Valores Transversales</h4>
+                        <p>Las actividades integran los cinco valores del proyecto: <strong>Esperanza, Vida, Fraternidad, Cooperación y Alegría</strong>. El aprendizaje se convierte en un acto de responsabilidad social, donde la ética comunicativa y el pensamiento crítico son pilares fundamentales.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Crear una campaña de concientización sobre un problema local → investigar, argumentar y comunicar con respeto y esperanza</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Guide Downloads Section -->
+    <section id="guias" class="guides-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Guías de Aprendizaje - Fase Amazonas</h2>
+                <p>30 guías diseñadas para adolescentes de 11 a 14 años. Cada investigación desarrolla pensamiento abstracto y prepara para la educación media con nuestro científico Lilo.</p>
+            </div>
+            
+            <div class="guides-grid">
+                <!-- Matemáticas Section -->
+                <div class="subject-section">
+                    <div class="subject-header">
+                        <div class="subject-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Matemáticas</h3>
+                        <!-- <p>15 guías para descifrar los secretos numéricos</p> -->
+                    </div>
+                    
+                    <div class="guides-list">
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.1</div>
+                                <div class="guide-title">Operaciones combinadas</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/1. M - Amazonas- Operaciones combinadas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.2</div>
+                                <div class="guide-title">Álgebra básica</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/2. M - Amazonas- Operaciones con porcentajes.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.3</div>
+                                <div class="guide-title">Unidades de medida longitud</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/3. M - Amazonas- Unidades de medida longitud.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.4</div>
+                                <div class="guide-title">Formas geometricas bi y tridimensionales</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/4. M - Amazonas- Formas geometricas bi y tridimensionales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.5</div>
+                                <div class="guide-title">Organización y representación de datos</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/5. M - Amazonas- Organización y representación de datos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.6</div>
+                                <div class="guide-title">Valor posicional</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/6. M - Amazonas- Valor posicional.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.7</div>
+                                <div class="guide-title">Unidades de medida peso</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/7. M - Amazonas- Unidades de medida peso.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.8</div>
+                                <div class="guide-title">Fracciones equivalentes</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/8. M - Amazonas- Fracciones equivalentes.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.9</div>
+                                <div class="guide-title">El plano cartesiano</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/9. M - Amazonas- El plano cartesiano.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.10</div>
+                                <div class="guide-title">Unidades de medida tiempo</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/10. M - Amazonas-Unidades de medida tiempo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.11</div>
+                                <div class="guide-title">Expresiones algebraicas</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/11. M - Amazonas-Expresiones algebraicas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.12</div>
+                                <div class="guide-title">Operaciones con una incógnita</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/12. M - Amazonas- Operaciones con una incógnita.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.13</div>
+                                <div class="guide-title">Unidades de medida capacidad</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/13. M - Amazonas-Unidades de medida capacidad.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.14</div>
+                                <div class="guide-title">Area de cuadriláteros</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/14. M - Amazonas-Area de cuadriláteros.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.15</div>
+                                <div class="guide-title">Manejo del dinero préstamo</div>
+                            </div>
+                            <a href="pdf/amazonas/matematicas/15. M - Amazonas-Manejo del dinero préstamo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Español Section -->
+                <div class="subject-section">
+                    <div class="subject-header">
+                        <div class="subject-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Español</h3>
+                        <!-- <p>15 guías para explorar la riqueza literaria</p> -->
+                    </div>
+                    
+                    <div class="guides-list">
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.1</div>
+                                <div class="guide-title">Recopilación de información de medios de comunicación</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/1. E - Amazonas - Recopilación de información de medios de comunicación.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.2</div>
+                                <div class="guide-title">Organización de información de medios de comunicación</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/2. E - Amazonas - Organización de información de medios de comunicación.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.3</div>
+                                <div class="guide-title">Análisis de información de medios de comunicación</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/3. E - Amazonas - Análisis de información de medios de comunicación.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.4</div>
+                                <div class="guide-title">Relación entre la pintura y la comunicación verbal</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/4. E - Amazonas - Relación entre la pintura y la comunicación verbal.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.5</div>
+                                <div class="guide-title">Relación entre la música y la comunicación verbal</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/5. E - Amazonas -Relación entre la música y la comunicación verbal.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.6</div>
+                                <div class="guide-title">Relación entre la danza y la comunicación verbal</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/6. E - Amazonas - Relación entre la danza y la comunicación verbal.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.7</div>
+                                <div class="guide-title">Relación entre el cine mudo y la comunicación verbal</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/7. E - Amazonas - Relación entre el cine mudo y la comunicación verbal.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.8</div>
+                                <div class="guide-title">Relación entre la fotografía y la comunicación verbal</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/8. E - Amazonas - Relación entre la fotografía y la comunicación verbal.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.9</div>
+                                <div class="guide-title">Relación entre la escultura y la comunicación verbal</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/9. E - Amazonas - Relación entre la escultura y la comunicación verbal.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.10</div>
+                                <div class="guide-title">Importancia del lenguaje para la construcción de conocimiento</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/10. E - Amazonas -Importancia del lenguaje para la construcción de conocimiento.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.11</div>
+                                <div class="guide-title">Estrategias argumentativas en la producción textual</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/11. E - Amazonas - Estrategias argumentativas en la producción textual.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.12</div>
+                                <div class="guide-title">Ensayos argumentativos</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/12. E - Amazonas - Ensayos argumentativos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.13</div>
+                                <div class="guide-title">Producciones literarias de la tradición oral latinoamericana</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/13. E - Amazonas - Producciones literarias de la tradición oral latinoamericana.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.14</div>
+                                <div class="guide-title">Relaciones entre obras literarias latinoamericanas</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/14. E - Amazonas -Relaciones entre obras literarias latinoamericanas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">4.15</div>
+                                <div class="guide-title">Historia de la literatura Latinoamericana</div>
+                            </div>
+                            <a href="pdf/amazonas/lenguaje/15. E - Amazonas -Historia de la literatura Latinoamericana.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="instructions">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">Recomendaciones para la Fase Amazonas</h2>
+                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para adolescentes de 11 a 14 años en contexto hospitalario o de desescolarización.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">1</div>
+                        <h4>Saludo con Lilo</h4>
+                        <p>Invita al adolescente a compartir su opinión sobre el tema. En esta etapa, valoran ser tratados como pensadores autónomos y críticos.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">2</div>
+                        <h4>Lee la Historia Pretexto</h4>
+                        <p>Lee con profundidad y plantea preguntas que inviten al análisis ético y crítico: “¿Qué intereses hay detrás de esta información?”, “¿Cómo afecta esto a tu comunidad?”. Esto activa el pensamiento reflexivo y la empatía social.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">3</div>
+                        <h4>Matemáticas: Del Concreto al Abstracto con Propósito</h4>
+                        <p>Permite que el estudiante elija herramientas (calculadora, software, gráficos) y estrategias. Guíalo para que conecte modelos matemáticos con problemas reales: presupuestos, estadísticas, crecimiento poblacional.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">4</div>
+                        <h4>Español: Comunicación con Rigor y Ética</h4>
+                        <p>Fomenta la producción de textos con intención crítica: ensayos, análisis de medios, reseñas literarias. Anima a evaluar fuentes, contrastar perspectivas y construir argumentos con base en evidencia y valores éticos.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">5</div>
+                        <h4>Profundidad y Autonomía</h4>
+                        <p>No hay prisa, pero sí exigencia intelectual. Si el estudiante está listo para explorar conceptos complejos (álgebra, ensayos, análisis de medios), acompáñalo con rigurosidad. Si necesita apoyo, ofrécelo sin infantilizar.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">6</div>
+                        <h4>Conexión con lo Social</h4>
+                        <p>Relaciona los aprendizajes con problemáticas reales: “¿Cómo usarías las matemáticas para analizar la contaminación?”, “¿Qué mensaje enviarías a través de un ensayo sobre la discriminación?”. Esto da sentido al conocimiento.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">7</div>
+                        <h4>Involucra a la Familia como Aliada</h4>
+                        <p>Invita al acompañante a participar como interlocutor crítico, co-investigador o audiencia. La <strong>fraternidad</strong> y la <strong>cooperación</strong> fortalecen el proceso y los lazos afectivos en momentos de vulnerabilidad.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">8</div>
+                        <h4>Cierre con Proyecto de Impacto</h4>
+                        <p>Termina con el “Momento de Concursar” (matemáticas) o con una actividad integradora (español: campaña de concientización, ensayo publicado, obra de teatro). Celebra el esfuerzo, la creatividad y el compromiso social.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <div class="alert alert-info d-inline-block" style="background: rgba(255,255,255,0.1); border: none; color: white;">
+                    <i class="fas fa-microscope text-success me-2"></i>
+                    <strong>Recuerda:</strong> Las guías de la Fase Amazonas están diseñadas para adolescentes que pueden estar en contextos de vulnerabilidad. Respeta su capacidad de pensamiento crítico, fomenta su autonomía y celebra su voz como agente de cambio.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="pb-3">
+                <img src="images/logo-eduteka-blanco.svg" class="logo-modern d-none d-lg-inline-block" alt="Logo Eduteka ICESI" title="Eduteka - Transformando la educación con tecnología" loading="eager">
+            </div>
+            <div class="footer-logo">
+                🐋 Lili Colección - Fase Amazonas
+            </div>
+            <p>Educación inclusiva y flexible para adolescentes de 11 a 14 años.<br>
+            Explorando la biodiversidad del conocimiento y preparándose para nuevos horizontes académicos.</p>
+            
+            <div class="mt-4">
+                <a href="index.html" class="btn-home">
+                    <i class="fas fa-home"></i>
+                    Volver al Inicio
+                </a>
+            </div>
+            
+            <hr style="margin: 40px 0 20px; opacity: 0.3;">
+            <p style="margin: 0; opacity: 0.7;">&copy; 2025 Aula Lili - Proyecto Educativo Inclusivo. Basado en el trabajo de la Fundación Valle del Lili.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.methodology-card, .guide-item, .instruction-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Download tracking
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const guideTitle = this.closest('.guide-item').querySelector('.guide-title').textContent;
+                console.log(`Descargando: ${guideTitle}`);
+            });
+        });
+
+        // Jungle animations for floating icons
+        document.querySelectorAll('.floating-icon').forEach((icon, index) => {
+            // Different animation styles for jungle elements
+            if (index === 0) { // Leaf grows
+                setInterval(() => {
+                    const grow = Math.sin(Date.now() * 0.002) * 0.15 + 1;
+                    const rotate = Math.sin(Date.now() * 0.001) * 5;
+                    icon.style.transform = `scale(${grow}) rotate(${rotate}deg)`;
+                }, 16);
+            } else if (index === 1) { // Feather flutters
+                setInterval(() => {
+                    const flutter = Math.sin(Date.now() * 0.005) * 12;
+                    const rotate = Math.cos(Date.now() * 0.003) * 8;
+                    icon.style.transform = `translateY(${flutter}px) rotate(${rotate}deg)`;
+                }, 16);
+            } else if (index === 2) { // Spider pulses
+                setInterval(() => {
+                    const pulse = Math.sin(Date.now() * 0.004) * 0.1 + 1;
+                    icon.style.transform = `scale(${pulse})`;
+                    icon.style.opacity = 0.7 + Math.sin(Date.now() * 0.003) * 0.3;
+                }, 16);
+            } else { // Frog bounces
+                setInterval(() => {
+                    const bounce = Math.max(0, Math.sin(Date.now() * 0.003)) * 20;
+                    icon.style.transform = `translateY(-${bounce}px)`;
+                }, 16);
+            }
+        });
+
+        // Add hover effect to guide items with jungle theme
+        document.querySelectorAll('.guide-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderLeftColor = '#10B981';
+                this.style.backgroundColor = '#F3E8FF';
+                this.style.transform = 'translateX(15px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.borderLeftColor = '#8B5CF6';
+                this.style.backgroundColor = 'white';
+                this.style.transform = 'translateX(0) scale(1)';
+            });
+        });
+
+        // Advanced ecosystem background effect
+        setInterval(() => {
+            const heroSection = document.querySelector('.hero-amazonas');
+            if (heroSection) {
+                // Simulate light filtering through canopy
+                const lightFilter = 0.08 + Math.sin(Date.now() * 0.0008) * 0.03;
+                const waveIntensity = 0.1 + Math.cos(Date.now() * 0.0005) * 0.05;
+                heroSection.style.setProperty('--light-filter', lightFilter);
+                heroSection.style.setProperty('--wave-intensity', waveIntensity);
+            }
+        }, 16);
+
+        // Scientific precision hover effects for methodology cards
+        document.querySelectorAll('.methodology-card').forEach((card, index) => {
+            card.addEventListener('mouseenter', function() {
+                // Add subtle glow effect for scientific equipment feel
+                this.style.boxShadow = '0 20px 40px rgba(139, 92, 246, 0.2), 0 0 20px rgba(139, 92, 246, 0.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

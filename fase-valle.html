@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase Valle - Aula Lili Escolar</title>
+    <meta name="author" content="Elisxeneth Tovar Mutis" />
+    <meta name="reply-to" content="etovar@icesi.edu.co">
+    <link rel="icon" href="images/favicon.ico" type="image/png">
+    <!-- Bootstrap CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="lib/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="lib/fontawesome/css/all.css">
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --ocean-blue: #1E3A8A;
+            --whale-blue: #3B82F6;
+            --sunny-yellow: #F59E0B;
+            --ocean-green: #10B981;
+            --valle-green: #059669;
+            --coral-pink: #F472B6;
+            --light-blue: #E0F2FE;
+            --light-green: #ECFDF5;
+            --gradient-valle: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        /* Floating animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        @keyframes grow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-blue) !important;
+            font-size: 1.8rem;
+        }
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: var(--valle-green) !important;
+            transform: translateY(-2px);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--valle-green);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        /* Hero Section */
+        .hero-valle {
+            background: var(--gradient-valle);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-valle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><path d="M0,20 Q250,80 500,20 T1000,20 L1000,0 L0,0 Z"/></svg>') repeat-x;
+            animation: wave 4s ease-in-out infinite;
+        }
+        .hero-content {
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+        .hero-valle h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-valle p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .fase-info {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            backdrop-filter: blur(5px);
+        }
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 4s ease-in-out infinite;
+        }
+        .floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: -0.5s; }
+        .floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -1s; }
+        .floating-icon:nth-child(3) { top: 40%; left: 20%; animation-delay: -1.5s; }
+        .floating-icon:nth-child(4) { top: 80%; left: 70%; animation-delay: -2s; }
+        .lilo-valle {
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+        .fase-icon {
+            font-size: 8rem;
+            animation: grow 2s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        /* Methodology Section */
+        .methodology {
+            padding: 100px 0;
+            background: var(--light-green);
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--valle-green);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .methodology-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            height: 100%;
+            margin-bottom: 30px;
+        }
+        .methodology-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: var(--valle-green);
+        }
+        .method-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-valle);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+        /* Guide Downloads Section */
+        .guides-section {
+            padding: 100px 0;
+            background: white;
+        }
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .subject-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .subject-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .subject-header h3 {
+            color: var(--valle-green);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .subject-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: var(--gradient-valle);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        .guide-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--valle-green);
+        }
+        .guide-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2);
+        }
+        .guide-info {
+            flex: 1;
+        }
+        .guide-number {
+            font-weight: bold;
+            color: var(--valle-green);
+            font-size: 0.9rem;
+        }
+        .guide-title {
+            font-size: 1rem;
+            color: #333;
+            margin: 5px 0;
+        }
+        .download-btn {
+            background: var(--valle-green);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .download-btn:hover {
+            background: #047857;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+        /* Instructions Section */
+        .instructions {
+            padding: 100px 0;
+            background: var(--gradient-valle);
+            color: white;
+        }
+        .instruction-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            min-height: 250px;
+        }
+        .instruction-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+        }
+        .instruction-number {
+            width: 40px;
+            height: 40px;
+            background: var(--sunny-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+       
+        /* Footer */
+        .footer {
+            background: #1F2937;
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+        .btn-home {
+            background: var(--sunny-yellow);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-home:hover {
+            background: #D97706;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+            color: white;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-valle h1 { font-size: 2.5rem; }
+            .hero-valle p { font-size: 1.1rem; }
+            .section-title h2 { font-size: 2.2rem; }
+            .guides-grid { grid-template-columns: 1fr; }
+            .floating-icon { display: none; }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo-container img {
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand logo-container" href="index.html">
+                <img src="images/log-eduteka-icesi.svg" class="logo-modern d-none d-lg-inline-block" alt="Logo Eduteka ICESI" title="Eduteka - Transformando la educación con tecnología" loading="eager">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">Sobre el Proyecto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#phases">Todas las Fases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#guias">Descargar Guías</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-valle">
+        <div class="floating-elements">
+            <div class="floating-icon"><i class="fas fa-seedling"></i></div>
+            <div class="floating-icon"><i class="fas fa-leaf"></i></div>
+            <div class="floating-icon"><i class="fas fa-sun"></i></div>
+            <div class="floating-icon"><i class="fas fa-butterfly"></i></div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1>Fase Valle</h1>
+                    <p>Sembrando las primeras semillas del conocimiento con Lilo. Un espacio de aprendizaje diseñado especialmente para nuestros pequeños exploradores.</p>
+                    <div class="fase-info">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <h4>👶 Edades</h4>
+                                <p>4 - 6 años</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>📚 Grados</h4>
+                                <p>Preescolar, 1° y 2°</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>📝 Guías</h4>
+                                <p>30 actividades</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <a href="#guias" class="btn-home">
+                            <i class="fas fa-download"></i>
+                            Descargar Guías
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 lilo-valle">
+                    <div class="fase-icon">🌱</div>
+                    <div style="font-size: 120px; color: rgba(255,255,255,0.9);">🐵</div>
+                    <h3 style="color: var(--sunny-yellow); margin-top: 20px;">¡Hola pequeños exploradores!</h3>
+                    <p style="color: #fff;">Lilo está aquí para acompañarlos en sus primeros pasos hacia el maravilloso mundo del aprendizaje</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Methodology Section -->
+    <section class="methodology">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Cómo Aprendemos en la Fase Valle?</h2>
+                <p>En la Fase Valle, el aprendizaje se construye desde la alegría, la exploración y la conexión emocional. Trabajamos simultáneamente en dos áreas fundamentales: <strong>Matemáticas</strong>, con el enfoque CPA del Método Singapur, y <strong>Español</strong>, alineado con los Estándares Básicas de Competencias en Lenguaje del Ministerio de Educación Nacional.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <h4>Matemáticas: Enfoque CPA</h4>
+                        <p>Los niños aprenden matemáticas pasando por tres etapas: <strong>Concreta</strong> (manipulan objetos reales), <strong>Pictórica</strong> (dibujan y representan visualmente) y <strong>Abstracta</strong> (usan símbolos y números). Esto evita la memorización y construye comprensión profunda.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Contar frutas reales → dibujarlas → escribir el número</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4>Español: Comunicación y Literatura</h4>
+                        <p>Priorizamos la <strong>expresión oral</strong>, la <strong>comprensión lectora</strong>, los <strong>juegos sonoros</strong> (rimas, canciones) y la <strong>literatura infantil</strong>. Cada guía incluye historias que fomentan la imaginación, la empatía y la expresión de emociones.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Leer un cuento → dramatizarlo → expresar cómo se sintieron los personajes</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="methodology-card">
+                        <div class="method-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Valores Transversales</h4>
+                        <p>Cada actividad está impregnada de los cinco valores del proyecto: <strong>Esperanza, Vida, Fraternidad, Cooperación y Alegría</strong>. El aprendizaje no es solo cognitivo, sino también emocional y ético.</p>
+                        <div class="mt-3">
+                            <small class="text-muted"><strong>Ejemplo:</strong> Jugar en equipo → compartir materiales → celebrar los logros colectivos</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Guide Downloads Section -->
+    <section id="guias" class="guides-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Guías de Aprendizaje - Fase Valle</h2>
+                <p>30 guías diseñadas especialmente para niños de 4 a 6 años. Cada una incluye actividades lúdicas y educativas con nuestro amigo Lilo.</p>
+            </div>
+            <div class="guides-grid">
+                <!-- Matemáticas Section -->
+                <div class="subject-section">
+                    <div class="subject-header">
+                        <div class="subject-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3>Matemáticas</h3>
+                    </div>
+                    <div class="guides-list">
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.1</div>
+                                <div class="guide-title">Comparación y clasificación</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/1. M - Valle - Comparación y clasificación.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.2</div>
+                                <div class="guide-title">Noción de cantidad</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/2. M - Valle - Noción de cantidad.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.3</div>
+                                <div class="guide-title">Unidades de medida longitud</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/3. M - Valle - Unidades de medida longitud.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.4</div>
+                                <div class="guide-title">Formas bidimensionales y tridimensionales</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/4. M - Valle - Formas bidimensionales y tridimensionales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.5</div>
+                                <div class="guide-title">Organización y representación de datos</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/5. M - Valle - Organización y representación de datos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.6</div>
+                                <div class="guide-title">Valor posicional unidades y decenas</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/6. M - Valle - Valor posicional unidades y decenas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.7</div>
+                                <div class="guide-title">Unidades de medida peso</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/7. M - Valle -Unidades de medida peso.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.8</div>
+                                <div class="guide-title">Las partes y el todo</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/8. M - Valle - Las partes y el todo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.9</div>
+                                <div class="guide-title">Relaciones espaciales</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/9. M - Valle - Relaciones espaciales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.10</div>
+                                <div class="guide-title">Unidades de medida tiempo</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/10. M - Valle - Unidades de medida tiempo.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.11</div>
+                                <div class="guide-title">Líneas</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/11. M - Valle - líneas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.12</div>
+                                <div class="guide-title">Pertenencia y no pertenencia</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/12. M - Valle - Pertenencia y no pertenencia.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.13</div>
+                                <div class="guide-title">Unidades de medida capacidad</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/13. M - Valle - Unidades de medida capacidad.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.14</div>
+                                <div class="guide-title">Perímetro</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/14. M - Valle - Perímetro.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.15</div>
+                                <div class="guide-title">Reconocimiento del dinero</div>
+                            </div>
+                            <a href="pdf/valle/matematicas/15. M - Valle - Reconocimiento del dinero.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Español Section -->
+                <div class="subject-section">
+                    <div class="subject-header">
+                        <div class="subject-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Español</h3>
+                    </div>
+                    <div class="guides-list">
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.1</div>
+                                <div class="guide-title">Canciones y Rimas</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/1.E-Valle-Canciones y Rimas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.2</div>
+                                <div class="guide-title">Coordinación espacial y juegos sonoros</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/2.E-Valle-Coordinación espacial y juegos sonoros.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.3</div>
+                                <div class="guide-title">Juegos de palabras</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/3.E-Valle - Juegos de palabras.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.4</div>
+                                <div class="guide-title">Comprensión de lectura</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/4. E-Valle - Comprensión de lectura.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.5</div>
+                                <div class="guide-title">Juego de roles</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/5. E-Valle - Juego de roles.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.6</div>
+                                <div class="guide-title">Teatro de títeres</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/6. E-Valle - Teatro de títeres.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.7</div>
+                                <div class="guide-title">Lectura de historias imaginativas</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/7. E-Valle - Lectura de historias imaginativas.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.8</div>
+                                <div class="guide-title">Lectura de libros de indagación</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/8. E-Valle - Lectura de libros de indagación.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.9</div>
+                                <div class="guide-title">Lectura de libros de indagación 2</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/9. E-Valle - Lectura de libros de indagación 2.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.10</div>
+                                <div class="guide-title">Explorador de historias</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/10. E-Valle - Explorador de historias.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.11</div>
+                                <div class="guide-title">Hablemos como robots</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/11. E-Valle - Hablemos como robots.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.12</div>
+                                <div class="guide-title">Escucha y no pares de escuchar</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/12. E-Valle - Escucha y no pares de escuchar.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.13</div>
+                                <div class="guide-title">Lilo descubre su nombre</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/13. E-Valle - Lilo descubre su nombre.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.14</div>
+                                <div class="guide-title">Reconocimiento de vocales</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/14. E-Valle - Reconocimiento de vocales.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                        <div class="guide-item">
+                            <div class="guide-info">
+                                <div class="guide-number">1.15</div>
+                                <div class="guide-title">Lectura de imágenes y símbolos</div>
+                            </div>
+                            <a href="pdf/valle/lenguaje/15. E-Valle - Lectura de imágenes y símbolos.pdf" class="download-btn" download target="_blank">
+                                <i class="fas fa-download"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Instructions Section -->
+    <section class="instructions">
+        <div class="container">
+            <div class="section-title">
+                <h2 style="color: white;">Recomendaciones para la Fase Valle</h2>
+                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para niños de 4 a 6 años en contexto hospitalario o de desescolarización.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">1</div>
+                        <h4>Saludo con Lilo</h4>
+                        <p>Comienza siempre con el saludo de Lilo. Invita al niño a presentarse, dibujarse o decir cómo se siente. Esta conexión emocional es el cimiento del aprendizaje en esta etapa.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">2</div>
+                        <h4>Lee la Historia Pretexto</h4>
+                        <p>Lee con entusiasmo la historia que abre cada guía. Usa voces, gestos y preguntas: “¿Qué crees que siente Lilo?”, “¿Tú has vivido algo así?”. Esto activa la comprensión y la empatía.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">3</div>
+                        <h4>Matemáticas: CPA en Acción</h4>
+                        <p>Sigue el orden CPA: primero manipula objetos reales (fichas, bloques), luego dibuja, y solo al final introduce números. Adapta las cantidades según el ritmo del niño.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">4</div>
+                        <h4>Español: Juega con el Lenguaje</h4>
+                        <p>Explora rimas, canciones, títeres, roles y juegos sonoros. Anima al niño a expresar emociones, inventar finales o dibujar lo que imaginó. El lenguaje es puente de conexión humana.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">5</div>
+                        <h4>Flexibilidad y Ajustes</h4>
+                        <p>No hay prisa. Si el niño no está listo para el momento abstracto o para escribir, quédate en lo concreto o en lo oral. El objetivo es que cada sesión sea un espacio de <strong>alegría y seguridad</strong>.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">6</div>
+                        <h4>Cierre con Juego</h4>
+                        <p>Termina siempre con el “Momento de Concursar” (matemáticas) o con una actividad lúdica (español: cantar, representar, inventar). El juego consolida el aprendizaje y fortalece el ánimo.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">7</div>
+                        <h4>Involucra a la Familia</h4>
+                        <p>Invita al acompañante a participar: que cante, que cuente una historia, que juegue. La <strong>fraternidad</strong> y la <strong>cooperación</strong> son parte esencial del proceso.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="instruction-card">
+                        <div class="instruction-number">8</div>
+                        <h4>Celebra el Proceso</h4>
+                        <p>No corrijas, acompaña. Celebra cada intento, cada expresión, cada descubrimiento. En esta fase, lo más importante no es la “respuesta correcta”, sino la <strong>confianza para explorar</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <div class="alert alert-info d-inline-block" style="background: rgba(255,255,255,0.1); border: none; color: white;">
+                    <i class="fas fa-heart text-warning me-2"></i>
+                    <strong>Recuerda:</strong> Las guías de la Fase Valle están diseñadas para niños que pueden estar en contextos de vulnerabilidad. La ternura, la paciencia y la alegría son tus mejores herramientas pedagógicas.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="pb-3">
+                <img src="images/logo-eduteka-blanco.svg" class="logo-modern d-none d-lg-inline-block" alt="Logo Eduteka ICESI" title="Eduteka - Transformando la educación con tecnología" loading="eager">
+            </div>
+            <div class="footer-logo">
+                🐋 Lili Colección - Fase Valle
+            </div>
+            <p>Educación inclusiva y flexible para niños de 4 a 6 años.<br>
+            Sembrando las primeras semillas del conocimiento con amor y paciencia.</p>
+            <div class="mt-4">
+                <a href="index.html" class="btn-home">
+                    <i class="fas fa-home"></i>
+                    Volver al Inicio
+                </a>
+            </div>
+            <hr style="margin: 40px 0 20px; opacity: 0.3;">
+            <p style="margin: 0; opacity: 0.7;">&copy; 2025 Aula Lili - Proyecto Educativo Inclusivo. Basado en el trabajo de la Fundación Valle del Lili.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0,0,0,0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        // Observe all cards and sections
+        document.querySelectorAll('.methodology-card, .guide-item, .instruction-card, .modulo-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+        // Download tracking
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const guideTitle = this.closest('.guide-item').querySelector('.guide-title').textContent;
+                console.log(`Descargando: ${guideTitle}`);
+            });
+        });
+        // Add hover effect to guide items
+        document.querySelectorAll('.guide-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderLeftColor = '#F59E0B';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.borderLeftColor = '#10B981';
+            });
+        });
+    </script>
+</body>
+</html>
