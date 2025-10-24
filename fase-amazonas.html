@@ -24,6 +24,7 @@
             --jungle-green: #059669;
             --sunny-yellow: #F59E0B;
             --ocean-green: #10B981;
+            --dark-green: #0f5132;
             --coral-pink: #F472B6;
             --light-blue: #E0F2FE;
             --light-purple: #F3E8FF;
@@ -419,6 +420,27 @@
             color: white;
         }
 
+        .btn-recomend {
+            background: var(--dark-green);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(11, 245, 167, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-recomend:hover {
+            background: #06d977;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(11, 245, 155, 0.6);
+            color: white;
+        }
         /* Responsive */
         @media (max-width: 768px) {
             .hero-amazonas h1 { font-size: 2.5rem; }
@@ -469,6 +491,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#guias">Descargar Guías</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#recomend">Recomendaciones</a>
+                    </li>                    
                 </ul>
             </div>
         </div>
@@ -511,6 +536,10 @@
                             <i class="fas fa-download"></i>
                             Descargar Guías
                         </a>
+                        <a href="#recomend" class="btn-recomend">
+                            <i class="fas fa-eye"></i>
+                            Recomendaciones
+                        </a>                        
                     </div>
                 </div>
                 
@@ -910,11 +939,11 @@
     </section>
 
     <!-- Instructions Section -->
-    <section class="instructions">
+    <section class="instructions" id="recomend">
         <div class="container">
             <div class="section-title">
                 <h2 style="color: white;">Recomendaciones para la Fase Amazonas</h2>
-                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para adolescentes de 11 a 14 años en contexto hospitalario o de desescolarización.</p>
+                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para adolescentes de 11 a 14 años en contexto hospitalario o de desescolarización o de nivelación academica.</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-6">
@@ -934,7 +963,7 @@
                 <div class="col-lg-6">
                     <div class="instruction-card">
                         <div class="instruction-number">3</div>
-                        <h4>Matemáticas: Del Concreto al Abstracto con Propósito</h4>
+                        <h4>Matemáticas de lo Concreto a lo Abstracto con Propósito</h4>
                         <p>Permite que el estudiante elija herramientas (calculadora, software, gráficos) y estrategias. Guíalo para que conecte modelos matemáticos con problemas reales: presupuestos, estadísticas, crecimiento poblacional.</p>
                     </div>
                 </div>
@@ -977,7 +1006,7 @@
             <div class="text-center mt-5">
                 <div class="alert alert-info d-inline-block" style="background: rgba(255,255,255,0.1); border: none; color: white;">
                     <i class="fas fa-microscope text-success me-2"></i>
-                    <strong>Recuerda:</strong> Las guías de la Fase Amazonas están diseñadas para adolescentes que pueden estar en contextos de vulnerabilidad. Respeta su capacidad de pensamiento crítico, fomenta su autonomía y celebra su voz como agente de cambio.
+                    <strong>Recuerda:</strong> Las guías de la Fase Amazonas están diseñadas para adolescentes que pueden estar en diferentes contextos. Respeta su capacidad de pensamiento crítico, fomenta su autonomía y celebra su voz como agente de cambio.
                 </div>
             </div>
         </div>

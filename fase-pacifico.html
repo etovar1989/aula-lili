@@ -21,6 +21,7 @@
             --light-pacifico: #3B82F6;
             --sunny-yellow: #F59E0B;
             --ocean-green: #10B981;
+            --dark-green: #0f5132;
             --coral-pink: #F472B6;
             --light-blue: #E0F2FE;
             --gradient-pacifico: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
@@ -352,6 +353,28 @@
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
             color: white;
         }
+
+        .btn-recomend {
+            background: var(--dark-green);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(11, 245, 167, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-recomend:hover {
+            background: #06d977;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(11, 245, 155, 0.6);
+            color: white;
+        }
         /* Responsive */
         @media (max-width: 768px) {
             .hero-pacifico h1 { font-size: 2.5rem; }
@@ -397,6 +420,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#guias">Descargar Guías</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#recomend">Recomendaciones</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -435,6 +461,10 @@
                             <i class="fas fa-download"></i>
                             Descargar Guías
                         </a>
+                        <a href="#recomend" class="btn-recomend">
+                            <i class="fas fa-eye"></i>
+                            Recomendaciones
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-6 lilo-pacifico">
@@ -459,7 +489,7 @@
                         <div class="method-icon">
                             <i class="fas fa-calculator"></i>
                         </div>
-                        <h4>Matemáticas: CPA y Resolución de Problemas</h4>
+                        <h4>Matemáticas: Resolución de Problemas</h4>
                         <p>Seguimos el enfoque CPA del Método Singapur, pero ahora con mayor énfasis en la <strong>resolución de problemas cotidianos</strong>. Los estudiantes aprenden a sumar, restar, medir, organizar datos y comprender el valor del dinero, siempre partiendo de lo concreto hacia lo abstracto.</p>
                         <div class="mt-3">
                             <small class="text-muted"><strong>Ejemplo:</strong> Resolver problemas de suma usando monedas reales → dibujar barras de conteo → escribir la operación simbólica</small>
@@ -806,11 +836,11 @@
         </div>
     </section>
     <!-- Instructions Section -->
-    <section class="instructions">
+    <section class="instructions" id="recomend">
         <div class="container">
             <div class="section-title">
                 <h2 style="color: white;">Recomendaciones para la Fase Pacífico</h2>
-                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para niños de 7 a 9 años en contexto hospitalario o de desescolarización.</p>
+                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para niños de 7 a 9 años en contexto hospitalario o de desescolarización o de nivelación academica.</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-6">
@@ -830,7 +860,7 @@
                 <div class="col-lg-6">
                     <div class="instruction-card">
                         <div class="instruction-number">3</div>
-                        <h4>Matemáticas: CPA con Profundidad</h4>
+                        <h4>Matemáticas con Profundidad</h4>
                         <p>Usa materiales concretos (monedas, regletas, ábacos), luego introduce representaciones pictóricas (barras de conteo) y finalmente el lenguaje simbólico. Adapta la complejidad según el ritmo del estudiante.</p>
                     </div>
                 </div>
@@ -873,7 +903,7 @@
             <div class="text-center mt-5">
                 <div class="alert alert-info d-inline-block" style="background: rgba(255,255,255,0.1); border: none; color: white;">
                     <i class="fas fa-compass text-warning me-2"></i>
-                    <strong>Recuerda:</strong> Las guías de la Fase Pacífico están diseñadas para niños que pueden estar en contextos de vulnerabilidad. La paciencia, el respeto por su ritmo y la celebración de sus logros son tus mejores herramientas pedagógicas.
+                    <strong>Recuerda:</strong> Las guías de la Fase Pacífico están diseñadas para niños que pueden estar en diferentes contextos. La paciencia, el respeto por su ritmo y la celebración de sus logros son tus mejores herramientas pedagógicas.
                 </div>
             </div>
         </div>

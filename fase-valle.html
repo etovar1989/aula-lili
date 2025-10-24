@@ -20,6 +20,7 @@
             --sunny-yellow: #F59E0B;
             --ocean-green: #10B981;
             --valle-green: #059669;
+            --dark-green: #0f5132;
             --coral-pink: #F472B6;
             --light-blue: #E0F2FE;
             --light-green: #ECFDF5;
@@ -353,6 +354,27 @@
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
             color: white;
         }
+        .btn-recomend {
+            background: var(--dark-green);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(11, 245, 167, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-recomend:hover {
+            background: #06d977;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(11, 245, 155, 0.6);
+            color: white;
+        }
         /* Responsive */
         @media (max-width: 768px) {
             .hero-valle h1 { font-size: 2.5rem; }
@@ -398,6 +420,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#guias">Descargar Guías</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#recomend">Recomendaciones</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -436,6 +461,10 @@
                             <i class="fas fa-download"></i>
                             Descargar Guías
                         </a>
+                        <a href="#recomend" class="btn-recomend">
+                            <i class="fas fa-eye"></i>
+                            Recomendaciones
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-6 lilo-valle">
@@ -460,7 +489,7 @@
                         <div class="method-icon">
                             <i class="fas fa-cubes"></i>
                         </div>
-                        <h4>Matemáticas: Enfoque CPA</h4>
+                        <h4>Matemáticas: Método Sigapur</h4>
                         <p>Los niños aprenden matemáticas pasando por tres etapas: <strong>Concreta</strong> (manipulan objetos reales), <strong>Pictórica</strong> (dibujan y representan visualmente) y <strong>Abstracta</strong> (usan símbolos y números). Esto evita la memorización y construye comprensión profunda.</p>
                         <div class="mt-3">
                             <small class="text-muted"><strong>Ejemplo:</strong> Contar frutas reales → dibujarlas → escribir el número</small>
@@ -472,7 +501,7 @@
                         <div class="method-icon">
                             <i class="fas fa-book"></i>
                         </div>
-                        <h4>Español: Comunicación y Literatura</h4>
+                        <h4>Español: Comunicación y Escritura</h4>
                         <p>Priorizamos la <strong>expresión oral</strong>, la <strong>comprensión lectora</strong>, los <strong>juegos sonoros</strong> (rimas, canciones) y la <strong>literatura infantil</strong>. Cada guía incluye historias que fomentan la imaginación, la empatía y la expresión de emociones.</p>
                         <div class="mt-3">
                             <small class="text-muted"><strong>Ejemplo:</strong> Leer un cuento → dramatizarlo → expresar cómo se sintieron los personajes</small>
@@ -798,11 +827,11 @@
         </div>
     </section>
     <!-- Instructions Section -->
-    <section class="instructions">
+    <section class="instructions" id="recomend">
         <div class="container">
             <div class="section-title">
                 <h2 style="color: white;">Recomendaciones para la Fase Valle</h2>
-                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para niños de 4 a 6 años en contexto hospitalario o de desescolarización.</p>
+                <p style="color: rgba(255,255,255,0.9);">Una guía práctica para educadores y familias, pensada para niños de 4 a 6 años en contexto hospitalario o de desescolarización o de nivelación academica.</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-6">
@@ -822,8 +851,8 @@
                 <div class="col-lg-6">
                     <div class="instruction-card">
                         <div class="instruction-number">3</div>
-                        <h4>Matemáticas: CPA en Acción</h4>
-                        <p>Sigue el orden CPA: primero manipula objetos reales (fichas, bloques), luego dibuja, y solo al final introduce números. Adapta las cantidades según el ritmo del niño.</p>
+                        <h4>Matemáticas en Acción</h4>
+                        <p>Sigue el orden de lo Concreto lo Pictórico Abstracto: primero manipula objetos reales (fichas, bloques), luego dibuja, y solo al final introduce números. Adapta las cantidades según el ritmo del niño.</p>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -865,7 +894,7 @@
             <div class="text-center mt-5">
                 <div class="alert alert-info d-inline-block" style="background: rgba(255,255,255,0.1); border: none; color: white;">
                     <i class="fas fa-heart text-warning me-2"></i>
-                    <strong>Recuerda:</strong> Las guías de la Fase Valle están diseñadas para niños que pueden estar en contextos de vulnerabilidad. La ternura, la paciencia y la alegría son tus mejores herramientas pedagógicas.
+                    <strong>Recuerda:</strong> Las guías de la Fase Valle están diseñadas para niños que pueden estar en diferentes contextos. La ternura, la paciencia y la alegría son tus mejores herramientas pedagógicas.
                 </div>
             </div>
         </div>
